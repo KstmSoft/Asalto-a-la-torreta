@@ -17,13 +17,15 @@ class tablero{
     void leer_archivo(string );
     void mostrar_archivo();
     void menu();
+    void cambiarValores();
 
    void mod_bonus(int nuevoValor);
     
   private:
-
-   // int bonus;
-   // int cantEjercito;
+   bool juegoIniciado;
+   int camino[10][10];
+   int bonus;
+   int cantEjercito;
 };
 
 #endif
