@@ -75,6 +75,7 @@ void tablero::menu() {
       case 1:
         juegoIniciado = true;
         leer_archivo("tablero.txt");
+        system("clear");
         mostrar_archivo();
         break;
       case 2:
@@ -100,9 +101,9 @@ void tablero::menu() {
         break;
         case 2: 
 
-        //system("clear");
+        system("clear");
         mostrar_archivo();
-        //mover_ejercito();
+        mover_ejercito();
         break;
       case 3:
         cambiarValores();
