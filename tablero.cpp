@@ -4,7 +4,6 @@ tablero::tablero(){
   juegoIniciado = false;
   bonus = 0;
   cantEjercito = 0;
-  torreta[0]=4;
 }
 
 tablero::~tablero(){}
@@ -97,6 +96,7 @@ void tablero::repartir_bonos(){
  }  
 }
 void tablero::mover_ejercito(){
+  torreta[0]=4;
   char respuesta;
   int ejercito;
   cout<<"¿Qué ejercito desea mover: 1 o 2?\n";  
@@ -158,7 +158,6 @@ do{
     x2--;
     camino[x2][y2]=2;}
     break;
-    //asi?
     case 'b': //derecha
     if(camino[x2][y2+1]==camino[4][4]||(y2+1)>9||camino[x2][y2+1]==1){
 
@@ -215,8 +214,8 @@ void tablero::menu() {
         juegoIniciado = true;
         leer_archivo("tablero.txt");
         posiciones_iniciales();
-        repartir_bonos();
         system("clear");
+        repartir_bonos();        
         mostrar_archivo();
         break;
       case 2:

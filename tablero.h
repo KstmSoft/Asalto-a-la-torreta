@@ -32,10 +32,10 @@ class tablero{
    int cantEjercito;
    int arriba=1,abajo=1,derecha=1,izquierda=1;
    int x1,x2,y1,y2;
+   int torreta[2];
    
   protected:
-  int torreta[2];
-   
+  
 };
 
 #endif
