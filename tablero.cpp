@@ -8,6 +8,22 @@ tablero::tablero(){
 
 tablero::~tablero(){}
 
+void tablero::vida_ejercito(){  
+  if(camino[3][4]==2&&arriba==1){
+     torreta[0]=torreta[0]-1;
+     arriba--;
+  }else if(camino[4][3]==2&&izquierda==1){
+     torreta[0]=torreta[0]-1;
+     izquierda--;
+  }else if(camino[5][4]==2&&abajo==1){
+     torreta[0]=torreta[0]-1;
+     abajo--;
+  }else if(camino[4][5]==2&&derecha==1){
+     torreta[0]=torreta[0]-1;
+     derecha--;
+  }  
+}
+
 void tablero::leer_archivo(string tablero){
   ifstream archivo;
   string texto;
