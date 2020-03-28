@@ -23,6 +23,23 @@ void tablero::vida_ejercito(){
      derecha--;
   }  
 }
+void tablero::set_datos(){
+
+  ifstream archivo("tablero.txt");
+  int x = 0, aux;
+  string auxiliar;
+  while (archivo >> auxiliar) {
+    stringstream aux(auxiliar);
+    x++;
+    if (x == 101) {   
+      aux >> bonus; 
+    }
+    if (x == 102) {
+      aux >> cantEjercito;  
+    }
+  }
+}
+
 
 void tablero::leer_archivo(string tablero){
   ifstream archivo;

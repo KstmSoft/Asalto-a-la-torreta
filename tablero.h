@@ -23,12 +23,17 @@ class tablero{
     void posiciones_iniciales();
     void set_datos();
     void repartir_bonos();
+    void vida_ejercito();
     
   private:
    bool juegoIniciado;
    int camino[10][10];
    int bonus;
    int cantEjercito;
+   int arriba=1,abajo=1,derecha=1,izquierda=1;
+   int x1,x2,y1,y2;
+   char respuesta;
+   
 };
 
 #endif
