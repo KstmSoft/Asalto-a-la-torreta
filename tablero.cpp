@@ -66,6 +66,19 @@ void tablero::posiciones_iniciales(){
   camino[x2][y2]=2;//posicion inicial del ejército 2
   camino[4][4]=5;//posicion inicial de la torreta
 }
+void tablero::repartir_bonos(){
+ int x,a,b;
+ srand(time(NULL));
+ while(x<bonus){  
+  a=rand()%10;
+  b=rand()%10;
+  if(camino[a][b]==0){
+    camino[a][b]=4;
+    x++;
+  }  
+ }  
+}
+
 
 void tablero::menu() {
   int opcion;
