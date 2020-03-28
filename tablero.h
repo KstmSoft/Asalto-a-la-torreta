@@ -18,8 +18,11 @@ class tablero{
     void mostrar_archivo();
     void menu();
     void cambiarValores();
-
-   void mod_bonus(int nuevoValor);
+    void mod_bonus(int nuevoValor);
+    void mover_ejercito();
+    void posiciones_iniciales();
+    void set_datos();
+    void repartir_bonos();
     
   private:
    bool juegoIniciado;
