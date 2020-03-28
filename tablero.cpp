@@ -78,7 +78,107 @@ void tablero::repartir_bonos(){
   }  
  }  
 }
+void tablero::mover_ejercito(){
+  int ejercito;
+  cout<<"¿Qué ejercito desea mover: 1 o 2?\n";  
+  cin>>ejercito;
+  system("clear");
+do{
+  
+ do{
+   if(torreta[0]==0){cout<<"La torreta ha sido destruida\n";}else{
+    cout<<"Vida de la Torreta: "<<torreta[0]<<endl;}
+    mostrar_archivo(); 
+     cout<<"Para desplazarse use la letra: \n a: Arriba\n b: Derecha \n c: Izquierda\n d: Abajo \n e: Cambiar Ejército o Salir\n f: Atacar torreta\n g: Golpear\n"; 
+     cin>>respuesta;
+     respuesta=tolower(respuesta);
+     
+  if(ejercito==1)
+  switch(respuesta){ //movimientos ejercito 1
+    case 'a': //arriba
+    if(camino[x1-1][y1]==camino[4][4]||(x1-1)<0||camino[x1-1][y1]==2){
+    }else{
+    camino[x1][y1]=0;
+    x1--;
+    camino[x1][y1]=1;}
+    break;
+    case 'b': //derecha
+    if(camino[x1][y1+1]==camino[4][4]||(y1+1)>9||camino[x1][y1+1]==2){
+ 
+    }else{
+    camino[x1][y1]=0;
+    y1++;
+    camino[x1][y1]=1;}
+    break;
+    case 'c': //izquierda
+    if(camino[x1][y1-1]==camino[4][4]||(y1-1)<0||camino[x1][y1-1]==2){
+ 
+    }else{
+    camino[x1][y1]=0;
+    y1--;
+    camino[x1][y1]=1;}
+    break;
+    case 'd': //abajo
+    if(camino[x1+1][y1]==camino[4][4]||(x1+1)>9||camino[x1+1][y1]==2){
+ 
+    }else{
+    camino[x1][y1]=0;
+    x1++;
+    camino[x1][y1]=1;}
+    break;
+    
+    //case 'g': //Golpear
+    
+  }else if( ejercito==2)
+  switch(respuesta){ //movimientos ejercito 2
+    case 'a': //arriba
+    if(camino[x2-1][y2]==camino[4][4]||(x2-1)<0||camino[x2-1][y2]==1){
 
+    }else {
+    camino[x2][y2]=0;
+    x2--;
+    camino[x2][y2]=2;}
+    break;
+    //asi?
+    case 'b': //derecha
+    if(camino[x2][y2+1]==camino[4][4]||(y2+1)>9||camino[x2][y2+1]==1){
+
+    }else {
+    camino[x2][y2]=0;
+    y2++;
+    camino[x2][y2]=2;}
+    break;
+    case 'c': //izquierda
+    if(camino[x2][y2-1]==camino[4][4]||(y2-1)<0||camino[x2][y2-1]==1){
+
+    }else{
+    camino[x2][y2]=0;
+    y2--;
+    camino[x2][y2]=2;}
+    break;
+    case 'd': //abajo
+        
+    if(camino[x2+1][y2]==camino[4][4]||(x2+1)>9||camino[x2+1][y2]==1){
+      
+    }else {
+    camino[x2][y2]=0;
+    x2++;
+    camino[x2][y2]=2;}
+    break;
+    case 'f':    
+    vida_ejercito();  
+    
+  };
+   
+   system("clear");
+  
+  }while(respuesta!='e'); 
+  cout<<"Elija una opción:\n 1: Mover Ejercito 1\n 2: Mover Ejercito 2\n 3: Salir\n";
+     cin>>ejercito;
+     system("clear"); 
+  
+  }while(ejercito!=3); 
+}
 
 void tablero::menu() {
   int opcion;
