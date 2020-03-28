@@ -4,7 +4,6 @@ tablero::tablero(){
   juegoIniciado = false;
   bonus = 0;
   cantEjercito = 0;
-  torreta[0]=4;
 }
 
 tablero::~tablero(){}
@@ -38,5 +37,93 @@ void tablero::mostrar_archivo(){
       cout << camino[i][j] << "   ";
     }
     cout << endl;
+  }
+}
+
+void tablero::mod_bonus(int nuevoValor){
+  bonus = nuevoValor;
+}
+
+void tablero::menu() {
+  int opcion;
+  do{
+    if (!juegoIniciado) {
+      //Pantalla de bienvenida, para visualizarla correctamente debemos expandir la ventana de comandos al maximo:
+      cout<<"   ▄▄▄· .▄▄ ·  ▄▄▄· ▄▄▌ ▄▄▄▄▄           ▄▄▄·     ▄▄▌   ▄▄▄·     ▄▄▄▄▄      ▄▄▄  ▄▄▄  ▄▄▄ .▄▄▄▄▄ ▄▄▄· "<<endl;
+      cout<<"  ▐█ ▀█ ▐█ ▀. ▐█ ▀█ ██• •██  ▪         ▐█ ▀█     ██•  ▐█ ▀█     •██  ▪     ▀▄ █·▀▄ █·▀▄.▀·•██  ▐█ ▀█ "<<endl;
+      cout<<"  ▄█▀▀█ ▄▀▀▀█▄▄█▀▀█ ██▪  ▐█.▪ ▄█▀▄     ▄█▀▀█     ██▪  ▄█▀▀█      ▐█.▪ ▄█▀▄ ▐▀▀▄ ▐▀▀▄ ▐▀▀▪▄ ▐█.▪▄█▀▀█ "<<endl;
+      cout<<"  ▐█ ▪▐▌▐█▄▪▐█▐█ ▪▐▌▐█▌▐▌▐█▌·▐█▌.▐▌    ▐█ ▪▐▌    ▐█▌▐▌▐█ ▪▐▌     ▐█▌·▐█▌.▐▌▐█•█▌▐█•█▌▐█▄▄▌ ▐█▌·▐█ ▪▐▌"<<endl;
+      cout<<"   ▀  ▀  ▀▀▀▀  ▀  ▀ .▀▀▀ ▀▀▀  ▀█▄▀▪     ▀  ▀     .▀▀▀  ▀  ▀      ▀▀▀  ▀█▄▀▪.▀  ▀.▀  ▀ ▀▀▀  ▀▀▀  ▀  ▀ "<<endl;
+      cout << "Para continuar, seleccione alguna de las siguientes opciones:" << endl;
+      cout << "1. Mostrar tablero" << endl;
+      cout << "2. Mostrar configuracion" << endl;
+      cout << "3. Cargar ultima partida" << endl;
+      cout << "0. Salir" << endl;
+      cin >> opcion;
+      switch (opcion) {
+      case 1:
+        juegoIniciado = true;
+        leer_archivo("tablero.txt");
+        mostrar_archivo();
+        break;
+      case 2:
+        cout << "Bonos disponibles: " << bonus << endl;
+        cout << "Tropas por ejercito: " << cantEjercito << endl;
+        break;
+      case 3:
+        cout << "Trabajando en ello..." << endl << endl;
+        break;
+
+      }
+    }else{
+      
+      cout << "1. Mostrar configuracion" << endl;
+      cout << "2. Jugar" << endl;
+      cout << "3. Cambiar valores" << endl;
+      cout << "0. Salir" << endl;
+      cin >> opcion;
+      switch (opcion) {
+      case 1:
+        cout << "Bonos disponibles: " << bonus << endl;
+        cout << "Tropas por ejercito: " << cantEjercito << endl;
+        break;
+        case 2: 
+
+        //system("clear");
+        mostrar_archivo();
+        //mover_ejercito();
+        break;
+      case 3:
+        cambiarValores();
+        break;
+        
+      }
+    }
+  }while(opcion!=0);
+  cout << "Guardando partida...";
+}
+
+void tablero::cambiarValores(){
+  int opcionV;
+        cout << "¿Que deseas cambiar?" << endl;
+        cout << "1. Cantidad Bonus" << endl;
+        cout << "2. Numero de avatares" << endl;
+        cin >> opcionV;
+        switch(opcionV){
+        case 1: 
+        int nuevoValor;
+        cout << "Ingresa nuevo valor: ";
+        cin >> nuevoValor;
+        mod_bonus(nuevoValor);
+        cout << "Bono modificado a: " << nuevoValor << endl << endl;
+        break;
+        case 2:
+        int num;
+        cout << "Ingresa nuevo valor: ";
+        cin >> num;
+        cantEjercito = num;
+        cout << "Numero de tropas por ejercito cambiado a: " << cantEjercito << endl << endl;
+        break;
+        default: cout << "Escoge una opcion correcta." << endl;
   }
 }
