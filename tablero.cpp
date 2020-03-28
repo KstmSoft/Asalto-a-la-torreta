@@ -31,3 +31,12 @@ void tablero::leer_archivo(string tablero){
   }
   archivo.close();
 }
+
+void tablero::mostrar_archivo(){
+  for (int i = 0; i < 10; i++) {
+    for (int j = 0; j < 10; j++) {
+      cout << camino[i][j] << "   ";
+    }
+    cout << endl;
+  }
+}
