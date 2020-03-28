@@ -48,12 +48,7 @@ void tablero::menu() {
   int opcion;
   do{
     if (!juegoIniciado) {
-      //Pantalla de bienvenida, para visualizarla correctamente debemos expandir la ventana de comandos al maximo:
-      cout<<"   ▄▄▄· .▄▄ ·  ▄▄▄· ▄▄▌ ▄▄▄▄▄           ▄▄▄·     ▄▄▌   ▄▄▄·     ▄▄▄▄▄      ▄▄▄  ▄▄▄  ▄▄▄ .▄▄▄▄▄ ▄▄▄· "<<endl;
-      cout<<"  ▐█ ▀█ ▐█ ▀. ▐█ ▀█ ██• •██  ▪         ▐█ ▀█     ██•  ▐█ ▀█     •██  ▪     ▀▄ █·▀▄ █·▀▄.▀·•██  ▐█ ▀█ "<<endl;
-      cout<<"  ▄█▀▀█ ▄▀▀▀█▄▄█▀▀█ ██▪  ▐█.▪ ▄█▀▄     ▄█▀▀█     ██▪  ▄█▀▀█      ▐█.▪ ▄█▀▄ ▐▀▀▄ ▐▀▀▄ ▐▀▀▪▄ ▐█.▪▄█▀▀█ "<<endl;
-      cout<<"  ▐█ ▪▐▌▐█▄▪▐█▐█ ▪▐▌▐█▌▐▌▐█▌·▐█▌.▐▌    ▐█ ▪▐▌    ▐█▌▐▌▐█ ▪▐▌     ▐█▌·▐█▌.▐▌▐█•█▌▐█•█▌▐█▄▄▌ ▐█▌·▐█ ▪▐▌"<<endl;
-      cout<<"   ▀  ▀  ▀▀▀▀  ▀  ▀ .▀▀▀ ▀▀▀  ▀█▄▀▪     ▀  ▀     .▀▀▀  ▀  ▀      ▀▀▀  ▀█▄▀▪.▀  ▀.▀  ▀ ▀▀▀  ▀▀▀  ▀  ▀ "<<endl;
+      
       cout << "Para continuar, seleccione alguna de las siguientes opciones:" << endl;
       cout << "1. Mostrar tablero" << endl;
       cout << "2. Mostrar configuracion" << endl;
