@@ -8,3 +8,26 @@ tablero::tablero(){
 }
 
 tablero::~tablero(){}
+
+void tablero::leer_archivo(string tablero){
+  ifstream archivo;
+  string texto;
+  archivo.open("tablero.txt");
+  if (archivo.fail()) {
+    cout << "¡Error al cargar el tablero!\n";
+    exit(1);
+  }
+  int c = 0;
+  while (!archivo.eof()) {
+    getline(archivo, texto);
+    istringstream f(texto);
+    string s;
+    int i = 0;
+    while (getline(f, s, '\t')) {
+      camino[c][i] = stoi(s);
+      i++;
+    }
+    c++;
+  }
+  archivo.close();
+}
