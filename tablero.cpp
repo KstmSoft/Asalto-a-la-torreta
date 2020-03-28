@@ -59,6 +59,13 @@ void tablero::mostrar_archivo(){
 void tablero::mod_bonus(int nuevoValor){
   bonus = nuevoValor;
 }
+void tablero::posiciones_iniciales(){
+  x1=4,x2=4;
+  y1=0,y2=9;
+  camino[x1][y1]=1;//posicion inicial del ejército 1
+  camino[x2][y2]=2;//posicion inicial del ejército 2
+  camino[4][4]=5;//posicion inicial de la torreta
+}
 
 void tablero::menu() {
   int opcion;
