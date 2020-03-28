@@ -96,6 +96,7 @@ void tablero::repartir_bonos(){
  }  
 }
 void tablero::mover_ejercito(){
+  char respuesta;
   int ejercito;
   cout<<"¿Qué ejercito desea mover: 1 o 2?\n";  
   cin>>ejercito;
