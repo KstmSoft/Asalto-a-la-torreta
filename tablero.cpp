@@ -4,6 +4,7 @@ tablero::tablero(){
   juegoIniciado = false;
   bonus = 0;
   cantEjercito = 0;
+  torreta[0]=4;
 }
 
 tablero::~tablero(){}
@@ -213,6 +214,8 @@ void tablero::menu() {
       case 1:
         juegoIniciado = true;
         leer_archivo("tablero.txt");
+        posiciones_iniciales();
+        repartir_bonos();
         system("clear");
         mostrar_archivo();
         break;
