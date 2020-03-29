@@ -202,7 +202,11 @@ void tablero::menu() {
   int opcion;
   do{
     if (!juegoIniciado) {
-      
+      cout<<"   ▄▄▄· .▄▄ ·  ▄▄▄· ▄▄▌ ▄▄▄▄▄           ▄▄▄·     ▄▄▌   ▄▄▄·     ▄▄▄▄▄      ▄▄▄  ▄▄▄  ▄▄▄ .▄▄▄▄▄ ▄▄▄· "<<endl;
+      cout<<"  ▐█ ▀█ ▐█ ▀. ▐█ ▀█ ██• •██  ▪         ▐█ ▀█     ██•  ▐█ ▀█     •██  ▪     ▀▄ █·▀▄ █·▀▄.▀·•██  ▐█ ▀█ "<<endl;
+      cout<<"  ▄█▀▀█ ▄▀▀▀█▄▄█▀▀█ ██▪  ▐█.▪ ▄█▀▄     ▄█▀▀█     ██▪  ▄█▀▀█      ▐█.▪ ▄█▀▄ ▐▀▀▄ ▐▀▀▄ ▐▀▀▪▄ ▐█.▪▄█▀▀█ "<<endl;
+      cout<<"  ▐█ ▪▐▌▐█▄▪▐█▐█ ▪▐▌▐█▌▐▌▐█▌·▐█▌.▐▌    ▐█ ▪▐▌    ▐█▌▐▌▐█ ▪▐▌     ▐█▌·▐█▌.▐▌▐█•█▌▐█•█▌▐█▄▄▌ ▐█▌·▐█ ▪▐▌"<<endl;
+      cout<<"   ▀  ▀  ▀▀▀▀  ▀  ▀ .▀▀▀ ▀▀▀  ▀█▄▀▪     ▀  ▀     .▀▀▀  ▀  ▀      ▀▀▀  ▀█▄▀▪.▀  ▀.▀  ▀ ▀▀▀  ▀▀▀  ▀  ▀ "<<endl;
       cout << "Para continuar, seleccione alguna de las siguientes opciones:" << endl;
       cout << "1. Mostrar tablero" << endl;
       cout << "2. Mostrar configuracion" << endl;
