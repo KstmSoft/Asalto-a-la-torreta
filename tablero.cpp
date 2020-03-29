@@ -223,10 +223,12 @@ void tablero::menu() {
         mostrar_archivo();
         break;
       case 2:
+        system("clear");
         cout << "Bonos disponibles: " << bonus << endl;
         cout << "Tropas por ejercito: " << cantEjercito << endl;
         break;
       case 3:
+        system("clear");
         cout << "Trabajando en ello..." << endl << endl;
         break;
 
@@ -240,6 +242,7 @@ void tablero::menu() {
       cin >> opcion;
       switch (opcion) {
       case 1:
+        system("clear");
         cout << "Bonos disponibles: " << bonus << endl;
         cout << "Tropas por ejercito: " << cantEjercito << endl;
         break;
@@ -250,6 +253,7 @@ void tablero::menu() {
         mover_ejercito();
         break;
       case 3:
+        system("clear");
         cambiarValores();
         break;
         
@@ -266,7 +270,8 @@ void tablero::cambiarValores(){
         cout << "2. Numero de avatares" << endl;
         cin >> opcionV;
         switch(opcionV){
-        case 1: 
+        case 1:
+        system("clear"); 
         int nuevoValor;
         cout << "Ingresa nuevo valor: ";
         cin >> nuevoValor;
@@ -274,6 +279,7 @@ void tablero::cambiarValores(){
         cout << "Bono modificado a: " << nuevoValor << endl << endl;
         break;
         case 2:
+        system("clear");
         int num;
         cout << "Ingresa nuevo valor: ";
         cin >> num;
