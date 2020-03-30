@@ -1,4 +1,4 @@
-#ifndef  _TABLERO_H_
+#ifndef _TABLERO_H_
 #define _TABLERO_H_
 #include <iostream>
 #include <fstream>
@@ -6,6 +6,7 @@
 #include <sstream>
 #include <stdio.h>
 #include <ctype.h>
+#include <vector>
 
 using namespace std;
 
@@ -13,29 +14,38 @@ class tablero{
   public:
     tablero();
     ~tablero();
-
-    void leer_archivo(string );
+    void leer_partida(string ruta); 
+    void guardar_partida(); 
+    void leer_archivo(string tablero);
     void mostrar_archivo();
     void menu();
-    void cambiarValores();
+    void set_datos();
+    void set_avatares();
     void mod_bonus(int nuevoValor);
     void mover_ejercito();
     void posiciones_iniciales();
-    void set_datos();
+    void cambiar_valores();
     void repartir_bonos();
-    void vida_ejercito();
-    
+    void cambiar_ejercito();
+    void atacar();
+
   private:
-   bool juegoIniciado;
-   int camino[10][10];
-   int bonus;
-   int cantEjercito;
-   int arriba=1,abajo=1,derecha=1,izquierda=1;
-   int x1,x2,y1,y2;
-   
-   
+    bool juego_iniciado;
+    char respuesta;
+    vector<int> avatares[2];
+    int camino[10][10];
+    int numero_jugadores[3];
+    int valor_jugadores[3];
+    int jugador[2];
+    int bonus;
+    int cant_ejercito;
+    int x1,x2,y1,y2;
+    int ejercito1[2];
+    int ejercito2[2];
+    int ejercito;
+    
   protected:
-   int torreta[2];
+    int torreta[2];
 };
 
 #endif
