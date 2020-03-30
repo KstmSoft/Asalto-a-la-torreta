@@ -2,12 +2,13 @@
 
 [![Run on Repl.it](https://repl.it/badge/github/KstmSoft/Asalto-a-la-torreta)](https://repl.it/github/KstmSoft/Asalto-a-la-torreta)
 
-Trabajo IPOO - Universidad del Valle
+<b>Trabajo IPOO - Universidad del Valle</b>
+<hr>
 <ul>
-  <li>Mauricio Sepulveda Olaya (42446-2711)</li>
-  <li>Daniel Caicedo (1927033-2711)</li>
-  <li>Juan Diego Arias Bahamón (1842423-3743)</li>
-  <li>Kevin Tobar (1841369-3743)</li>
+  <li>Mauricio Sepulveda Olaya <b>(1942446-2711)</b></li>
+  <li>Daniel Caicedo <b>(1927033-2711)</b></li>
+  <li>Juan Diego Arias Bahamón <b>(1842423-3743)</b></li>
+  <li>Kevin Tobar <b>(1841369-3743)</b></li>
 </ul>
 
 Asalto a la torreta
