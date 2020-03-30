@@ -140,12 +140,6 @@ void tablero::guardar_partida() {
   archive.close();
 }
 
-void tablero::cambiar_ejercito(){
-  cout << "Elija una opción:\n 1: Mover Ejercito 1\n 2: Mover Ejercito 2\n 3: Salir\n";
-  cin >> ejercito;
-  system("clear");
-}
-
 void tablero::atacar() {
   /*
     Esta funcion se encarga de realizar ataques al ejercito contrario
@@ -224,117 +218,6 @@ void tablero::posiciones_iniciales() {
   camino[x1][y1] = ejercito1[0]; //Posicion inicial del ejército 1
   camino[x2][y2] = ejercito2[0]; //Posicion inicial del ejército 2
   camino[4][4] = torreta[0]; //Posicion inicial de la torreta
-}
-
-void tablero::mover_ejercito() {
-  cout << "¿Qué ejercito desea mover: 1 o 2?\n";
-  cin >> ejercito;
-  system("clear");
-  do {
-    do {
-      if (torreta[1] == 0) {
-        cout << "La torreta ha sido destruida. Por favor inicie otra partida\n";
-      } else {
-        cout << "Vida de la Torreta: " << torreta[1] << endl;
-      }
-      if (ejercito1[1] == 0) {
-        cout << "El ejército 1 ha sido destruido. Por favor inicie otra partida\n";
-      } else {
-        cout << "Vida ejercito 1: " << ejercito1[1] << endl;
-      }
-      if (ejercito2[1] == 0) {
-        cout << "El ejército 2 ha sido destruido. Por favor inicie otra partida\n";
-      } else {
-        cout << "Vida ejercito 2: " << ejercito2[1] << endl;
-      }
-      mostrar_archivo();
-      cout << "Para desplazarse use la letra: \n w: Arriba\n d: Derecha \n a: Izquierda\n s: Abajo \n f: Atacar\n e: Cambiar Ejército o Salir\n";
-      cin >> respuesta;
-      respuesta = tolower(respuesta);
-      if (!(ejercito1[1] == 0 || ejercito2[1] == 0 || torreta[1] == 0)) {
-        if (ejercito == ejercito1[0]) {
-          switch (respuesta) { //Movimientos ejercito 1
-            case 'w': //Arriba
-              if (!(camino[x1 - 1][y1] == torreta[0] || (x1 - 1) < 0 || camino[x1 - 1][y1] == ejercito2[0])) {
-                camino[x1][y1] = 0;
-                x1--;
-                if (camino[x1][y1] == 4) ejercito1[1] = ejercito1[1] + 1;
-                camino[x1][y1] = ejercito1[0];
-              }
-              break;
-            case 'd': //Derecha
-              if (!(camino[x1][y1 + 1] == torreta[0] || (y1 + 1) > 9 || camino[x1][y1 + 1] == ejercito2[0])) {
-                camino[x1][y1] = 0;
-                y1++;
-                if (camino[x1][y1] == 4) ejercito1[1] = ejercito1[1] + 1;
-                camino[x1][y1] = ejercito1[0];
-              }
-              break;
-            case 'a': //Izquierda
-              if (!(camino[x1][y1 - 1] == torreta[0] || (y1 - 1) < 0 || camino[x1][y1 - 1] == ejercito2[0])) {
-                camino[x1][y1] = 0;
-                y1--;
-                if (camino[x1][y1] == 4) ejercito1[1] = ejercito1[1] + 1;
-                camino[x1][y1] = ejercito1[0];
-              }
-              break;
-            case 's': //Abajo
-              if (!(camino[x1 + 1][y1] == torreta[0] || (x1 + 1) > 9 || camino[x1 + 1][y1] == ejercito2[0])) {
-                camino[x1][y1] = 0;
-                x1++;
-                if (camino[x1][y1] == 4) ejercito1[1] = ejercito1[1] + 1;
-                camino[x1][y1] = ejercito1[0];
-              }
-              break;
-          }
-        } else if (ejercito == ejercito2[0]){
-          switch (respuesta) { //Movimientos ejercito 2
-            case 'w': //Arriba
-              if (!(camino[x2 - 1][y2] == torreta[0] || (x2 - 1) < 0 || camino[x2 - 1][y2] == ejercito1[0])) {
-                camino[x2][y2] = 0;
-                x2--;
-                if (camino[x2][y2] == 4) ejercito2[1] = ejercito2[1] + 1;
-                camino[x2][y2] = ejercito2[0];
-              }
-              break;
-            case 'd': //Derecha
-              if (!(camino[x2][y2 + 1] == torreta[0] || (y2 + 1) > 9 || camino[x2][y2 + 1] == ejercito1[0])) {
-                camino[x2][y2] = 0;
-                y2++;
-                if (camino[x2][y2] == 4) ejercito2[1] = ejercito2[1] + 1;
-                camino[x2][y2] = ejercito2[0];
-              }
-              break;
-            case 'a': //Izquierda
-              if (!(camino[x2][y2 - 1] == torreta[0] || (y2 - 1) < 0 || camino[x2][y2 - 1] == ejercito1[0])) {
-                camino[x2][y2] = 0;
-                y2--;
-                if (camino[x2][y2] == 4) ejercito2[1] = ejercito2[1] + 1;
-                camino[x2][y2] = ejercito2[0];
-              }
-              break;
-            case 's': //Abajo
-              if (!(camino[x2 + 1][y2] == torreta[0] || (x2 + 1) > 9 || camino[x2 + 1][y2] == ejercito1[0])) {
-                camino[x2][y2] = 0;
-                x2++;
-                if (camino[x2][y2] == 4) ejercito2[1] = ejercito2[1] + 1;
-                camino[x2][y2] = ejercito2[0];
-              }
-              break;
-          };
-        }
-      }
-      system("clear");
-    } while (respuesta != 'e' && respuesta != 'f');
-    switch(respuesta){
-      case 'e':
-        cambiar_ejercito();
-        break;
-      case 'f':
-        atacar();
-        break;
-    }
-  } while (ejercito != 3);
 }
 
 void tablero::repartir_bonos() {
