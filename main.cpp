@@ -5,5 +5,6 @@ using namespace std;
 int main() {
   tablero hacer;
   hacer.set_datos();
-  hacer.menu();  
+  hacer.set_avatares();
+  hacer.menu();
 }
