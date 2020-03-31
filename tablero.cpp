@@ -1,20 +1,22 @@
 #include "tablero.h"
 
 tablero::tablero() {
+  //Se inicializan las variables necesarias en el codigo
   juego_iniciado = false;
   bonus = 0;
   cant_ejercito = 0;
   torreta[0] = 5;
   torreta[1] = 4;
-  ejercito1[1] = 0;
-  ejercito1[0] = 1;
-  ejercito2[1] = 0;
-  ejercito2[0] = 2;
+  ejercito1[1] = 0; //para cambiar cuando se muevan
+  ejercito1[0] = 1; //Valor ejercito 1
+  ejercito2[1] = 0; //para cambiar cuando se mueven
+  ejercito2[0] = 2; //Valor ejercito 2
 }
 
-tablero::~tablero() {}
+tablero::~tablero() {} //Destructor
 
 void tablero::leer_archivo(string tablero) {
+  //Aqui leemos el archivo tablero.txt, unicamente se lee la parte de la matriz. 
   ifstream archivo;
   string texto;
   archivo.open(tablero.c_str());
@@ -38,6 +40,7 @@ void tablero::leer_archivo(string tablero) {
 }
 
 void tablero::set_datos() {
+  //En esta parte, se lee lo que esta debajo de la matriz. Los bonus y la cantidad del ejercito
   ifstream archivo("tablero.txt");
   int x = 0, aux;
   string auxiliar;
@@ -121,6 +124,7 @@ void tablero::mostrar_archivo() {
 }
 
 void tablero::guardar_partida() {
+  //Guardamos la partida, pero esto va para la segunda entrega, asi que no es muy importante
   ofstream archive;
   archive.open("partida"".txt", ios::out);
 
@@ -141,6 +145,7 @@ void tablero::guardar_partida() {
 }
 
 void tablero::cambiar_ejercito(){
+  //Esto es para la opcion donde se cambia el ejercito dentro del juego
   cout << "Elija una opción:\n 1: Mover Ejercito 1\n 2: Mover Ejercito 2\n 3: Salir\n";
   cin >> ejercito;
   system("clear");
@@ -219,6 +224,7 @@ void tablero::atacar() {
 }
 
 void tablero::posiciones_iniciales() {
+  //Se cargan las posiciones iniciales del juego.
   x1 = 4, x2 = 4;
   y1 = 0, y2 = 9;
   camino[x1][y1] = ejercito1[0]; //Posicion inicial del ejército 1
@@ -227,6 +233,7 @@ void tablero::posiciones_iniciales() {
 }
 
 void tablero::mover_ejercito() {
+  //Con este metodo, el usuario va poder mover su ejercito, y de paso tambien se verifica los estados del juego.
   cout << "¿Qué ejercito desea mover: 1 o 2?\n";
   cin >> ejercito;
   system("clear");
@@ -338,6 +345,7 @@ void tablero::mover_ejercito() {
 }
 
 void tablero::repartir_bonos() {
+  //Se reparten los bonos por el mapa
   int x, a, b;
   srand(time(NULL));
   while (x < bonus) {
@@ -351,6 +359,7 @@ void tablero::repartir_bonos() {
 }
 
 void tablero::mod_bonus(int nuevoValor) {
+  //Metodo para cambiar de valor el bonus
   bonus = nuevoValor;
 }
 
@@ -422,6 +431,7 @@ void tablero::menu() {
 }
 
 void tablero::cambiar_valores() {
+  //Metodo para cambiar los valores, de acuerdo a como lo necesite el usuario
   int opcionV;
   cout << "¿Que deseas cambiar?" << endl;
   cout << "1. Cantidad Bonus" << endl;

@@ -45,6 +45,7 @@ class tablero{
     int ejercito;
     
   protected:
+  //La torreta es protegida.
     int torreta[2];
 };
 
