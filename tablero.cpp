@@ -122,27 +122,6 @@ void tablero::mostrar_archivo() {
   }
 }
 
-void tablero::guardar_partida() {
-  //Guardamos la partida, pero esto va para la segunda entrega, asi que no es muy importante
-  ofstream archive;
-  archive.open("partida"".txt", ios::out);
-
-  if (archive.fail()) {
-    cout << "No se pudo abrir el archivo.";
-    exit(1);
-  }
-  for (int i = 0; i < 10; i++) {
-    for (int j = 0; j < 10; j++) {
-      archive << camino[i][j] << " ";
-    }
-    archive << endl;
-  }
- /* archive<<bonus<<endl<<torreta[1]<<endl<<ejercito1[1]<<endl;
-  archive<<ejercito2[1];
-  */
-  archive.close();
-}
-
 void tablero::cambiar_ejercito(){
   //Esto es para la opcion donde se cambia el ejercito dentro del juego
   cout << "Elija una opción:\n 1: Mover Ejercito 1\n 2: Mover Ejercito 2\n 3: Salir\n";
@@ -239,9 +218,6 @@ void tablero::posiciones_iniciales(){
     torreta[1] = 6;   
     break;    
   }
-  
-  ejercito1[1] = 2;
-  ejercito2[1] = 2;
   x1=4,x2=4;
   y1=0,y2=9;
   camino[x1][y1]=ejercito1[0];//posicion inicial del ejército 1
@@ -379,6 +355,100 @@ void tablero::mod_bonus(int nuevoValor) {
   //Metodo para cambiar de valor el bonus
   bonus = nuevoValor;
 }
+//guarda la partida en un archivo plano
+void tablero::guardar_partida(string nombre) {
+  ofstream archive;
+  string name;
+  name=nombre+".txt";
+  archive.open(name);
+  if(archive.fail()){
+    cout << "No se pudo abrir el archivo.";
+    exit(1);
+  }
+  //guarda la matriz
+  for (int i = 0; i < 10; i++) {
+    for (int j = 0; j < 10; j++) {
+      archive<<camino[i][j]<<" ";
+    }
+    archive << endl;
+  }
+  archive << endl;
+  //guarda la vida de los ejercitos y torreta
+  if(optn==2){
+    archive<<optn<<" ";
+    archive<<torreta[1]<<" ";
+    archive<<n<<" "<<s<<" ";
+    archive<<o<<" "<<o2<<" ";
+    archive<<e<<" "<<e2<<" ";
+    archive<<ejercito1[1]<<" ";
+    archive<<ejercito2[1]<<" "; 
+
+  }else if(optn==1){
+  archive<<optn<<" ";
+  archive<<torreta[1]<<" ";
+  archive<<n<<" "<<s<<" ";
+  archive<<o<<" "<<e<<" ";
+  archive<<ejercito1[1]<<" ";
+  archive<<ejercito2[1]<<" ";  
+  archive.close();
+  }
+}
+
+//carga los datos de las partidas anteriores
+void tablero::cargar_datos(string ruta){
+  ifstream leer;
+  int dato,x;
+  string auxiliar,name;
+  name=ruta+".txt";
+  leer.open(name.c_str());
+ for(int i=0;i<11;i++){    
+    for(int j=0;leer>>auxiliar;j++){
+      stringstream aux(auxiliar);
+      aux>>dato;
+      camino[i][j]=dato;      
+    }
+   
+  }
+ 
+    leer.close();
+   //carga las posiciones de los ejercitos
+   for(int i=0;i<10;i++)
+     for (int j = 0; j < 10; j++) {
+      if(camino[i][j]==2){   
+        x2=i;y2=j;
+        ejercito2[0]=camino[i][j];                
+        }else if(camino[i][j]==1){
+          x1=i;y1=j;
+          ejercito1[0]=camino[i][j];          
+        }
+    }
+    
+   //carga los datos de torreta y ejercitos
+    optn=camino[10][0];
+    if(optn==1){
+      torreta[1]=camino[10][1];
+      n=camino[10][2];
+      s=camino[10][3];
+      o=camino[10][4];
+      e=camino[10][5];
+      ejercito1[1]=camino[10][6];
+      ejercito2[1]=camino[10][7];
+      camino[4][4]=torreta[0];
+      
+    }else if(optn==2){
+        torreta[1]=camino[10][1];
+        n=camino[10][2];
+        s=camino[10][3];
+        o=camino[10][4];
+        o2=camino[10][5];
+        e=camino[10][6];
+        e2=camino[10][7];
+        ejercito1[1]=camino[10][8];
+        ejercito2[1]=camino[10][9];
+        camino[4][4]=torreta[0];
+        camino[5][4]=torreta[0];
+    }  
+}
 
 void tablero::menu() {
   int opcion;
@@ -402,8 +472,8 @@ void tablero::menu() {
         juego_iniciado = true;
         leer_archivo("tablero.txt");
         system("clear");
-        posiciones_iniciales();
         repartir_bonos();
+        posiciones_iniciales();        
         mostrar_archivo();
         break;
       case 2:
@@ -413,10 +483,15 @@ void tablero::menu() {
         break;
       case 3:
         system("clear");
-        
-        leer_archivo("partida.txt");
+        string name;
+        cout<<"nombre de la partida: \n";
+        cin>>name;
+        cargar_datos(name);        
+        cout<<"Vida torreta: "<<torreta[1]<<endl;
+        cout<<"Vida ejercito 1: "<<ejercito1[1]<<endl;
+        cout<<"Vida ejercito 2: "<<ejercito2[1]<<endl;
         mostrar_archivo();
-        //cout << "Trabajando en ello..." << endl << endl;
+        mover_ejercito();
         break;
       }
     } else {
@@ -443,7 +518,11 @@ void tablero::menu() {
       }
     }
   } while (opcion != 0);
-  guardar_partida();
+  system("clear");
+  cout << "nombre de la partida: \n";
+  string nombree;
+  cin >> nombree;
+  guardar_partida(nombree);
   cout << "Guardando partida...\n";
 }
 
