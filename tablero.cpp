@@ -6,7 +6,6 @@ tablero::tablero() {
   bonus = 0;
   cant_ejercito = 0;
   torreta[0] = 5;
-  torreta[1] = 4;
   ejercito1[1] = 0; //para cambiar cuando se muevan
   ejercito1[0] = 1; //Valor ejercito 1
   ejercito2[1] = 0; //para cambiar cuando se mueven
@@ -223,13 +222,31 @@ void tablero::atacar() {
   system("clear");
 }
 
-void tablero::posiciones_iniciales() {
-  //Se cargan las posiciones iniciales del juego.
-  x1 = 4, x2 = 4;
-  y1 = 0, y2 = 9;
-  camino[x1][y1] = ejercito1[0]; //Posicion inicial del ejército 1
-  camino[x2][y2] = ejercito2[0]; //Posicion inicial del ejército 2
-  camino[4][4] = torreta[0]; //Posicion inicial de la torreta
+void tablero::posiciones_iniciales(){
+  cout<<"Organizar Tamaño de la Torre:\n";
+  cout<<"1: Un Espacio.\n";
+  cout<<"2: Dos Espacios.\n";
+  cin>>optn;
+  //if(camino)
+  switch (optn){
+    case 1:
+    camino[4][4]=torreta[0];
+    torreta[1] = 4;
+    break;
+    case 2:
+    camino[4][4]=torreta[0];
+    camino[5][4]=torreta[0]; 
+    torreta[1] = 6;   
+    break;    
+  }
+  
+  ejercito1[1] = 2;
+  ejercito2[1] = 2;
+  x1=4,x2=4;
+  y1=0,y2=9;
+  camino[x1][y1]=ejercito1[0];//posicion inicial del ejército 1
+  camino[x2][y2]=ejercito2[0];//posicion inicial del ejército 2
+  camino[4][4]=torreta[0];//posicion inicial de la torreta
 }
 
 void tablero::mover_ejercito() {
@@ -384,8 +401,8 @@ void tablero::menu() {
       case 1:
         juego_iniciado = true;
         leer_archivo("tablero.txt");
-        posiciones_iniciales();
         system("clear");
+        posiciones_iniciales();
         repartir_bonos();
         mostrar_archivo();
         break;
