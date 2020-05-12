@@ -5,10 +5,8 @@ tablero::tablero() {
   juego_iniciado = false;
   bonus = 0;
   cant_ejercito = 0;
-  torreta[0] = 5;
-  ejercito1[1] = 0; //para cambiar cuando se muevan
+  torreta[0] = 5;  
   ejercito1[0] = 1; //Valor ejercito 1
-  ejercito2[1] = 0; //para cambiar cuando se mueven
   ejercito2[0] = 2; //Valor ejercito 2
   Ejercito_1.resize(4);
   Ejercito_2.resize(4);
@@ -93,11 +91,13 @@ void tablero::posiciones_iniciales(){
     torreta[1] = 6;   
     break;    
   }
+  ejercito1[1] = 2;
+  ejercito2[1] = 2;
   x1=4,x2=4;
   y1=0,y2=9;
   camino[x1][y1]=ejercito1[0];//posicion inicial del ejército 1
   camino[x2][y2]=ejercito2[0];//posicion inicial del ejército 2
-  camino[4][4]=torreta[0];//posicion inicial de la torreta
+  //camino[4][4]=torreta[0];//posicion inicial de la torreta
 
 
   //AVATARES EJERCITO 1
@@ -133,39 +133,282 @@ int tablero::PosicionAtaque(){
   //ATAQUE ENTRE EJERCITOS
 
    //arriba
-   if(camino[x1 - 1][y1] == ejercito2[0] || camino[x2 -1][y2] == ejercito1[0] ){     
-     return 0;
+     if(camino[x1 - 1][y1] == ejercito2[0] || camino[x2 -1][y2] == ejercito1[0] ){     
+       return 0;
 
-  }//derecha
-  else if(camino[x1][y1 + 1] == ejercito2[0] || camino[x2][y2 + 1] == ejercito1[0]){
-     return 0;
+    }//derecha
+    else if(camino[x1][y1 + 1] == ejercito2[0] || camino[x2][y2 + 1] == ejercito1[0]){
+       return 0;
 
-  }//abajo
-  else if(camino[x1 + 1][y1] == ejercito2[0] || camino[x2 + 1][y2] == ejercito1[0]){
-     return 0;
+    }//abajo
+    else if(camino[x1 + 1][y1] == ejercito2[0] || camino[x2 + 1][y2] == ejercito1[0]){
+       return 0;
 
-  }//izquierda
-  else if(camino[x1][y1 - 1] == ejercito2[0] || camino[x2][y2 - 1] == ejercito1[0]){
-     return 0;
-  } //Funcion que verifica si la Torreta está cerca
-   //arriba
-  else if(camino[x2 -1][y2] == torreta[0] ){     
-     return 1;
+    }//izquierda
+    else if(camino[x1][y1 - 1] == ejercito2[0] || camino[x2][y2 - 1] == ejercito1[0]){
+       return 0;
+    } //Funcion que verifica si la Torreta está cerca
+     //arriba
+    else if(camino[x2 -1][y2] == torreta[0] ){     
+       return 1;
 
-  }//derecha
-  else if(camino[x2][y2 + 1] == torreta[0]){
-     return 1;
+    }//derecha
+    else if(camino[x2][y2 + 1] == torreta[0]){
+       return 1;
 
-  }//abajo
-  else if(camino[x2 + 1][y2] == torreta[0]){
-     return 1;
+    }//abajo
+    else if(camino[x2 + 1][y2] == torreta[0]){
+       return 1;
 
-  }//izquierda
-  else if(camino[x2][y2 - 1] == torreta[0]){
-     return 1;
-  }else 
+    }//izquierda
+    else if(camino[x2][y2 - 1] == torreta[0]){
+       return 1;
+    }else 
 
-   return 2;
+     return 2;
+
+}
+
+//Batalla entre los ejercitos
+void tablero::Batalla(int N){
+
+   //Avatares vivos
+     int Vivos, Vivos2;
+     int s,s2;
+  
+   // Auxiliares que suman el Poder y Mana de los ejercitos
+     int aux = 0,aux2 = 0; 
+
+   // Vector que huardará al Avatar con menor Vida
+     vector <Personaje*> H;     
+     H.resize(2);
+
+   //Posiciones de los Avatares con menor Vida
+     int p = 0,p2 = 0; 
+     int auxx ,auxx2;
+
+    //Funcion que hace el ataque de acuerdo al ejercito que está atacando    
+     switch(N){
+       //Ataca el ejercito 1
+       case 1:
+
+          //iterador que va a buscar al menor de los atacantes
+          
+          for (int i = 0; i < Ejercito_1.size(); i++){
+            Vivos = 0;
+            
+            //suma los poderes del ejercito 1
+             if(Ejercito_1[i] -> Vida != 0){
+
+                aux +=  Ejercito_1[i] -> Poder; 
+                
+             }
+            //Busca al Avatar con menor Vida del ejercito 1
+             if(auxx > Ejercito_1[i] -> Vida){
+
+                if( Ejercito_1[i] -> Vida != 0){
+  
+                 auxx = Ejercito_1[i] -> Vida;
+                 p = i;
+  
+                } 
+            }
+
+            Vivos = 0;
+
+            for (int j = 0; j < 5; j++){
+               if(Ejercito_1[j] -> Vida != 0){
+                   Vivos+=1;
+                   s = j;
+                 }
+             }
+            
+
+          }
+          //Iterador que va a buscar al menor de los atacados          
+          
+          for (int i = 0; i < Ejercito_2.size(); i++){     
+                      
+             //Suma de los Mana del ejercito Atacado
+             if(Ejercito_2[i] -> Vida != 0){
+
+                aux2 +=  Ejercito_2[i] -> Mana;           
+
+             }
+              
+             if(auxx2 > Ejercito_2[i] -> Vida){
+               if( Ejercito_2[i] -> Vida != 0){
+                auxx2 = Ejercito_2[i] -> Vida;
+                 p2 = i;
+               }
+                
+             }                  
+            
+            Vivos2 = 0;
+
+            for (int j = 0; j < 5; j++){
+               if(Ejercito_2[j] -> Vida != 0){
+                    Vivos2+=1;
+                    s2 = j;
+                 }
+             }  
+
+          }        
+	 
+           //Funcion que ataca al último Avatar vivo
+          if (Vivos == 1){
+            p = s;
+          }
+          
+          if (Vivos2 == 1){
+            p2 = s;
+          }
+          
+
+          //Funcion que ataca de acuerdo a la suma de los Poderes y Manas del ejercito
+          if(aux > aux2){
+            // Si el Poder es mayor que em Mana
+            Ejercito_1[0] -> Atacar(Ejercito_2[p2]);
+
+          }else if(aux2 > aux){
+
+             // Si el Mana es mayor que em Poder
+             Ejercito_2[0] -> Atacar(Ejercito_1[p]);
+
+          }else if(aux == aux2){
+
+            //si Mana y Poder son iguales
+            Ejercito_1[0] -> Empate(Ejercito_2[p2]);
+            Ejercito_2[0] -> Empate(Ejercito_1[p]);
+
+          }
+          
+
+          
+       break;
+
+       case 2:
+          
+          
+         
+
+          for (int i = 0; i < Ejercito_2.size(); i++){
+             //Suma de los Poderes del ejercito Atacante
+             if(Ejercito_2[i] -> Vida != 0){
+
+                aux +=  Ejercito_2[i] -> Poder;
+                Vivos2 +=1;
+
+             }
+
+             if(auxx > Ejercito_2[i] -> Vida){
+               if( Ejercito_2[i] -> Vida != 0){
+                auxx = Ejercito_2[i] -> Vida;
+                 p = i;
+               } 
+             }
+
+             Vivos = 0;
+
+            for (int j = 0; j < 5; j++){
+               if(Ejercito_2[j] -> Vida != 0){
+                   Vivos+=1;
+                   s = j;
+                 }
+             }
+          } 
+
+          
+          
+          for (int i = 0; i < Ejercito_1.size(); i++){
+            //suma los Mana del ejercito atacado
+             if(Ejercito_1[i] -> Vida != 0){
+
+                aux2 +=  Ejercito_1[i] -> Mana; 
+
+             }
+            //Busca al Avatar con menor Vida del ejercito 1
+             if(auxx2 > Ejercito_1[i] -> Vida){
+
+              if( Ejercito_1[i] -> Vida != 0){
+
+               auxx2 = Ejercito_1[i] -> Vida;
+               p2 = i;
+
+              } 
+            }
+
+            Vivos2 = 0;
+
+            for (int j = 0; j < 5; j++){
+               if(Ejercito_1[j] -> Vida != 0){
+                   Vivos2+=1;
+                   s2 = j;
+                 }
+             }
+
+          } 
+
+            //Funcion que ataca al último Avatar vivo
+          if (Vivos == 1){
+            p = s;
+          }
+          
+          if (Vivos2 == 1){
+            p2 = s;
+          }
+
+          //Funcion que ataca de acuerdo a la suma de los Poderes y Manas del ejercito
+          if(aux > aux2){
+            // Si el Poder es mayor que em Mana
+            Ejercito_2[0] -> Atacar(Ejercito_1[p2]);
+
+          }else if(aux2 > aux){
+
+             // Si el Mana es mayor que em Poder
+             Ejercito_1[0] -> Atacar(Ejercito_2[p]);
+
+          }else if(aux == aux2){
+
+            //si Mana y Poder son iguales
+            Ejercito_1[0] -> Empate(Ejercito_2[p2]);
+            Ejercito_2[0] -> Empate(Ejercito_1[p]);
+               
+          } 
+         
+       break;
+
+     }       
+
+}
+
+
+void tablero::VidaTorreta(){ 
+   
+  if(camino[3][4]==ejercito2[0]&&n==1){//arriba
+     torreta[1]=torreta[1]-1;
+     n--;
+  }else if(camino[4][3]==2&&e==1){//derecha
+     torreta[1]=torreta[1]-1;
+     e--;
+  }else if(camino[5][4]==2&&s==1){//abajo
+     torreta[1]=torreta[1]-1;
+     s--;
+  }else if(camino[4][5]==2&&o==1){//izquierda
+     torreta[1]=torreta[1]-1;
+     o--;
+  }else if(optn==2){
+       if(camino[5][5]==2&&e2==1){
+           torreta[1]=torreta[1]-1;
+           e2--;
+       }else if(camino[5][3]==2&&o2==1){
+          torreta[1]=torreta[1]-1;
+          o2--;
+       }else if(camino[6][4]==2&&s==1){
+          torreta[1]=torreta[1]-1;
+          s--;
+       }
+  }      
 }
 
 
@@ -217,6 +460,13 @@ void tablero::mover_ejercito() {
                 camino[x1][y1] = ejercito1[0];
               }
               break;
+              case 'f':
+              
+              if(PosicionAtaque() == 0){
+                Batalla(1);
+              }
+
+              break;
           }
         } else if (ejercito == ejercito2[0]){
           switch (respuesta) { //Movimientos ejercito 2
@@ -252,18 +502,25 @@ void tablero::mover_ejercito() {
                 camino[x2][y2] = ejercito2[0];
               }
               break;
+
+              case 'f':           
+
+              if(PosicionAtaque() == 0){
+                Batalla(2);
+              }else if(PosicionAtaque() == 1){
+              VidaTorreta();
+              }        
+
+            break;
           }
         }
       }
       system("clear");
-    } while (respuesta != 'e' && respuesta != 'f');
+    } while (respuesta != 'e');
     switch(respuesta){
-      case 'e':
+        case 'e':
         cambiar_ejercito();
-        break;
-      case 'f':
-        //atacar();
-        break;
+        break;     
     }
   } while (ejercito != 3);
 }

@@ -33,6 +33,8 @@ class tablero{
     void cargar_datos(string); 
     void MostrarDatos();
     int PosicionAtaque();
+    void Batalla(int);
+    void VidaTorreta();
 
   private:
     bool juego_iniciado;
