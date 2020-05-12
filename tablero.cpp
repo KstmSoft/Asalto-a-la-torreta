@@ -10,6 +10,8 @@ tablero::tablero() {
   ejercito1[0] = 1; //Valor ejercito 1
   ejercito2[1] = 0; //para cambiar cuando se mueven
   ejercito2[0] = 2; //Valor ejercito 2
+  Ejercito_1.resize(4);
+  Ejercito_2.resize(4);
 }
 
 tablero::~tablero() {} //Destructor
@@ -55,62 +57,12 @@ void tablero::set_datos() {
   }
 }
 
-void tablero::set_avatares() {
-  /*
-    La linea 1 de "avatares.txt" equivale a los avatares pertenecientes
-    al ejercito 1.
-    La linea 2 de "avatares.txt" equivale a los avatares pertenecientes
-    al ejercito 2.
-    1 representa luchador.
-    2 representa tirador.
-    3 representa mago.
-    se crea variable "avatares" que es un array de vectores.
-    para acceder a los avatares del ejercito 1 se emplea:
-    avatares[0], para acceder a los avatares del ejercito 2
-    se empleta avatares[1], la variable avatares devolverá un vector.
-  */
-  ifstream archivo("avatares.txt");
-  int index = 0;
-  for (string linea; getline(archivo, linea);) {
-    stringstream ss(linea);
-    string segment;
-    while (getline(ss, segment, ' ')) {
-      avatares[index].push_back(stoi(segment.c_str()));
-    }
-    index++;
-  }
-  /*
-    Segun el pdf la vida del ejercito es la vida
-    de cada avatar sumada, entonces, teniendo en cuenta
-    eso se suma la vida teniendo en cuenta el tipo de
-    avatar.  
-  */
-  vector < int > avatar_ej1 = avatares[0];
-  vector < int > avatar_ej2 = avatares[1];
-  /*Ejercito 1*/
-  for (int i = 0; i < avatar_ej1.size(); i++) {
-    int vida_extra;
-    if (avatar_ej1[i] == 1) { //Luchador 4 de vida
-      vida_extra = 4;
-    } else if (avatar_ej1[i] == 2) { //Tirador 3 de vida
-      vida_extra = 3;
-    } else if (avatar_ej1[i] == 3) { //Mago 5 de vida
-      vida_extra = 5;
-    }
-    ejercito1[1] = ejercito1[1] + vida_extra;
-  }
-  /*Ejercito 2*/
-  for (int i = 0; i < avatar_ej2.size(); i++) {
-    int vida_extra;
-    if (avatar_ej2[i] == 1) { //Luchador 4 de vida
-      vida_extra = 4;
-    } else if (avatar_ej2[i] == 2) { //Tirador 3 de vida
-      vida_extra = 3;
-    } else if (avatar_ej2[i] == 3) { //Mago 5 de vida
-      vida_extra = 5;
-    }
-    ejercito2[1] = ejercito2[1] + vida_extra;
-  }
+
+void tablero::cambiar_ejercito(){
+  //Esto es para la opcion donde se cambia el ejercito dentro del juego
+  cout << "Elija una opción:\n 1: Mover Ejercito 1\n 2: Mover Ejercito 2\n 3: Salir\n";
+  cin >> ejercito;
+  system("clear");
 }
 
 void tablero::mostrar_archivo() {
@@ -122,84 +74,7 @@ void tablero::mostrar_archivo() {
   }
 }
 
-void tablero::cambiar_ejercito(){
-  //Esto es para la opcion donde se cambia el ejercito dentro del juego
-  cout << "Elija una opción:\n 1: Mover Ejercito 1\n 2: Mover Ejercito 2\n 3: Salir\n";
-  cin >> ejercito;
-  system("clear");
-}
 
-void tablero::atacar() {
-  /*
-    Esta funcion se encarga de realizar ataques al ejercito contrario
-    Para atacar el ejercito contrario debe estar cerca al ejercito jugador (esto desbloquea todos los avatares)
-    Al estar lejos, solo podrá usar arqueros.
-
-    Al atacar el ejercito enemigo, deberá seleccionar a que avatar desea ejecutar, al ejecutarlo, la vida
-    del ejercito disminuirá en funcion a la vida del avatar.
-  */
-  system("clear");
-  int respuesta;
-  cout << "Puedes usar los siguientes avatares: " << endl;
-  vector < int > avatar = (ejercito == ejercito1[0] ? avatares[0] : avatares[1]);//Avatares del ejercito jugador
-  vector < int > avatar_disponibles;
-
-  //Esta condición detecta si el ejercito esta cerca del otro.
-  if (!(camino[ejercito == ejercito1[0] ? x2 - 1 : x1 - 1][ejercito == ejercito1[0] ? y2 : y1] == ejercito1[0] || camino[ejercito == ejercito1[0] ? x2 : x1][ejercito == ejercito1[0] ? y2 + 1 : y1 + 1] == ejercito1[0] || camino[ejercito == ejercito1[0] ? x2 + 1 : x1 + 1][ejercito == ejercito1[0] ? y2 : y1] == ejercito1[0] || camino[ejercito == ejercito1[0] ? x2 : x1][ejercito == ejercito1[0] ? y2 - 1 : y1 - 1] == ejercito1[0])) {
-    for (int i = 0; i < avatar.size(); i++) if (avatar[i] != 1 && avatar[i] != 3) avatar_disponibles.push_back(avatar[i]);
-  } else {
-    avatar_disponibles = avatar;
-  }
-
-  for (int i = 0; i < avatar_disponibles.size(); i++) {
-    cout << i << ". ";
-    if (avatar_disponibles[i] == 1) {
-      cout << "Luchador (4)";
-    } else if (avatar_disponibles[i] == 2) {
-      cout << "Tirador (3)";
-    } else if (avatar_disponibles[i] == 3) {
-      cout << "Mago (5)";
-    }
-    cout << endl;
-  }
-
-  cin >> respuesta;
-  //Por ahora no afecta a el juego que avatar seleccione para atacar.
-
-  cout << "¿A qué avatar enemigo desea atacar?: " << endl;
-  vector < int > enemigo = (ejercito == ejercito1[0] ? avatares[1] : avatares[0]);//Avatares enemigos
-  for (int i = 0; i < enemigo.size(); i++) {
-    cout << i << ". ";
-    if (enemigo[i] == 1) {
-      cout << "Luchador (4)";
-    } else if (enemigo[i] == 2) {
-      cout << "Tirador (3)";
-    } else if (enemigo[i] == 3) {
-      cout << "Mago (5)";
-    }
-    cout << endl;
-  }
-
-  cin >> respuesta;
-
-  system("clear");
-  if (enemigo[respuesta] == 1) {
-    cout << "Mataste un luchador! se restará (4) de vida al equipo contrario.";
-    (ejercito == ejercito1[0] ? ejercito2[1] = ejercito2[1] - 4 : ejercito1[1] = ejercito1[1] - 4);
-  } else if (enemigo[respuesta] == 2) {
-    cout << "Mataste un tirador! se restará (3) de vida al equipo contrario.";
-    (ejercito == ejercito1[0] ? ejercito2[1] = ejercito2[1] - 3 : ejercito1[1] = ejercito1[1] - 3);
-  } else if (enemigo[respuesta] == 3) {
-    cout << "Mataste un luchador! se restará (5) de vida al equipo contrario.";
-    (ejercito == ejercito1[0] ? ejercito2[1] = ejercito2[1] - 5 : ejercito1[1] = ejercito1[1] - 5);
-  }
-  (ejercito == ejercito1[0] ? avatares[1] : avatares[0]).erase((ejercito == ejercito1[0] ? avatares[1] : avatares[0]).begin() + respuesta);
-  cout << endl << endl;
-  cout << "Presiona cualquier tecla para continuar..." << endl;
-  cin.ignore();
-  cin.get();
-  system("clear");
-}
 
 void tablero::posiciones_iniciales(){
   cout<<"Organizar Tamaño de la Torre:\n";
@@ -223,6 +98,32 @@ void tablero::posiciones_iniciales(){
   camino[x1][y1]=ejercito1[0];//posicion inicial del ejército 1
   camino[x2][y2]=ejercito2[0];//posicion inicial del ejército 2
   camino[4][4]=torreta[0];//posicion inicial de la torreta
+
+
+  //AVATARES EJERCITO 1
+
+   //Luchadores
+    Ejercito_1[0] = new Avatar(4 ,0.6, 0.7, "Luchador");//primer parámetro es la Vida, segundo Mana, tercero Daño y cuarto Nombre
+    Ejercito_1[1] = new Avatar(4, 0.6, 0.7, "Luchador");
+   //Tiradores
+    Ejercito_1[2] = new Avatar(3, 0.3, 1, "Tirador");
+    Ejercito_1[3] = new Avatar(3 , 0.3, 1,"Tirador");
+   //Magos 
+    Ejercito_1[4] = new Avatar(5 , 1, 0.2, "Mago");
+
+
+
+  //AVATARES EJERCITO 2
+
+  //Luchadores
+    Ejercito_2[0] = new Avatar(4, 0.6, 0.7, "Luchador");
+    Ejercito_2[1] = new Avatar(4, 0.6, 0.7, "Luchador");
+   //Tiradores
+    Ejercito_2[2] = new Avatar(3, 0.3 , 1, "Tirador");
+    Ejercito_2[3] = new Avatar(3, 0.3, 1, "Tirador");
+   //Magos 
+    Ejercito_2[4] = new Avatar(5 , 1, 0.2, "Mago");
+    
 }
 
 void tablero::mover_ejercito() {
@@ -321,7 +222,7 @@ void tablero::mover_ejercito() {
                 camino[x2][y2] = ejercito2[0];
               }
               break;
-          };
+          }
         }
       }
       system("clear");

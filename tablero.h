@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <vector>
+#include "Personaje.h"
+#include "Avatar.h"
 
 using namespace std;
 
@@ -45,6 +47,8 @@ class tablero{
     int ejercito2[2];
     int ejercito;
     int n=1,s=1,e=1,o=1,e2=1,o2=1,optn;
+    vector <Personaje*> Ejercito_1;
+    vector <Personaje*> Ejercito_2; 
     
   protected:
   //La torreta es protegida.
