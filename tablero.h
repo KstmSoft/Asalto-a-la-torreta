@@ -31,6 +31,7 @@ class tablero{
     void atacar();
     void guardar_partida(string);
     void cargar_datos(string); 
+    void MostrarDatos();
 
   private:
     bool juego_iniciado;

@@ -123,7 +123,7 @@ void tablero::posiciones_iniciales(){
     Ejercito_2[3] = new Avatar(3, 0.3, 1, "Tirador");
    //Magos 
     Ejercito_2[4] = new Avatar(5 , 1, 0.2, "Mago");
-    
+
 }
 
 void tablero::mover_ejercito() {
@@ -133,21 +133,8 @@ void tablero::mover_ejercito() {
   system("clear");
   do {
     do {
-      if (torreta[1] == 0) {
-        cout << "La torreta ha sido destruida. Por favor inicie otra partida\n";
-      } else {
-        cout << "Vida de la Torreta: " << torreta[1] << endl;
-      }
-      if (ejercito1[1] == 0) {
-        cout << "El ejército 1 ha sido destruido. Por favor inicie otra partida\n";
-      } else {
-        cout << "Vida ejercito 1: " << ejercito1[1] << endl;
-      }
-      if (ejercito2[1] == 0) {
-        cout << "El ejército 2 ha sido destruido. Por favor inicie otra partida\n";
-      } else {
-        cout << "Vida ejercito 2: " << ejercito2[1] << endl;
-      }
+    
+      MostrarDatos();
       mostrar_archivo();
       cout << "Para desplazarse use la letra: \n w: Arriba\n d: Derecha \n a: Izquierda\n s: Abajo \n f: Atacar\n e: Cambiar Ejército o Salir\n";
       cin >> respuesta;
@@ -232,7 +219,7 @@ void tablero::mover_ejercito() {
         cambiar_ejercito();
         break;
       case 'f':
-        atacar();
+        //atacar();
         break;
     }
   } while (ejercito != 3);
@@ -251,6 +238,42 @@ void tablero::repartir_bonos() {
     }
   }
 }
+
+void tablero::MostrarDatos(){
+
+ cout << "\n";
+  if (torreta[1] == 0) {
+        cout << "La torreta ha sido destruida. Por favor inicie otra partida\n";
+      } else {
+        cout << "Vida de la Torreta: " << torreta[1] << endl;
+      }
+
+       //Mostrar informacion de los ejercitos
+        cout << "    Ejercito 1    ";
+        cout << "  Ejercito 2\n ";  
+      for(int i = 0; i < 5; i++){
+          //Nombre ejercito 1
+           cout <<i<< ". "<< Ejercito_1[i] -> Nombre <<": ";
+          //Vida ejercito 1
+           cout << Ejercito_1[i] -> Vida;
+           
+           if(Ejercito_1[i] -> Nombre== "Tirador"){
+             cout << "   "; 
+           }if(Ejercito_1[i] -> Nombre== "Mago"){
+             cout << "      "; 
+           }else if(Ejercito_1[i] -> Nombre== "Luchador"){
+             cout << "  ";
+           }
+
+          //Nombre ejercito 2
+           cout <<i<< ". "<< Ejercito_2[i] -> Nombre <<" ";
+          //Vida ejercito 2
+           cout << Ejercito_2[i] -> Vida <<"\n ";          
+
+      }
+      cout << "\n";
+}
+
 
 void tablero::mod_bonus(int nuevoValor) {
   //Metodo para cambiar de valor el bonus
