@@ -126,6 +126,49 @@ void tablero::posiciones_iniciales(){
 
 }
 
+//Método que identifica si los ejercitos estan cerca del enemigo
+
+int tablero::PosicionAtaque(){
+  
+  //ATAQUE ENTRE EJERCITOS
+
+   //arriba
+   if(camino[x1 - 1][y1] == ejercito2[0] || camino[x2 -1][y2] == ejercito1[0] ){     
+     return 0;
+
+  }//derecha
+  else if(camino[x1][y1 + 1] == ejercito2[0] || camino[x2][y2 + 1] == ejercito1[0]){
+     return 0;
+
+  }//abajo
+  else if(camino[x1 + 1][y1] == ejercito2[0] || camino[x2 + 1][y2] == ejercito1[0]){
+     return 0;
+
+  }//izquierda
+  else if(camino[x1][y1 - 1] == ejercito2[0] || camino[x2][y2 - 1] == ejercito1[0]){
+     return 0;
+  } //Funcion que verifica si la Torreta está cerca
+   //arriba
+  else if(camino[x2 -1][y2] == torreta[0] ){     
+     return 1;
+
+  }//derecha
+  else if(camino[x2][y2 + 1] == torreta[0]){
+     return 1;
+
+  }//abajo
+  else if(camino[x2 + 1][y2] == torreta[0]){
+     return 1;
+
+  }//izquierda
+  else if(camino[x2][y2 - 1] == torreta[0]){
+     return 1;
+  }else 
+
+   return 2;
+}
+
+
 void tablero::mover_ejercito() {
   //Con este metodo, el usuario va poder mover su ejercito, y de paso tambien se verifica los estados del juego.
   cout << "¿Qué ejercito desea mover: 1 o 2?\n";
