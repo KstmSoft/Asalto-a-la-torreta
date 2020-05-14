@@ -16,6 +16,7 @@ class tablero{
   public:
     tablero();
     ~tablero();
+    void CambioPosiciones();
     void leer_partida(string ruta); 
     void leer_archivo(string tablero);
     void mostrar_archivo();

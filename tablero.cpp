@@ -126,6 +126,106 @@ void tablero::posiciones_iniciales(){
 
 }
 
+//Método que cambia las Posiciones de los ejercitos después de cada enfrentamiento
+
+void tablero::CambioPosiciones(){
+
+  //EJERCITO 1
+
+     //Izquierda       
+
+    if (!(camino[x1][y1 - 1] == torreta[0] || (y1 - 1) < 0 || camino[x1][y1 - 1] == ejercito2[0]))
+    {
+       camino[x1][y1] = 0;
+       y1--;
+      // if (camino[x1][y1] == 4) 
+       //RestaurarVida(1);
+       camino[x1][y1] = ejercito1[0];
+    }   
+     
+     //Arriba
+
+     else if (!(camino[x1 - 1][y1] == torreta[0] || (x1 - 1) < 0 || camino[x1 - 1][y1] == ejercito2[0])) {
+         camino[x1][y1] = 0;
+         x1--;
+         //if (camino[x1][y1] == 4) 
+         //RestaurarVida(1);
+         camino[x1][y1] = ejercito1[0];
+
+      }
+      //Derecha
+      
+        else if (!(camino[x1][y1 + 1] == torreta[0] || (y1 + 1) > 9 || camino[x1][y1 + 1] == ejercito2[0]))
+          {
+
+             camino[x1][y1] = 0;
+             y1++;
+             //if (camino[x1][y1] == 4) 
+             //RestaurarVida(1);
+             camino[x1][y1] = ejercito1[0];
+          }
+
+          //Abajo
+
+            else if (!(camino[x1 + 1][y1] == torreta[0] || (x1 + 1) > 9 || camino[x1 + 1][y1] == ejercito2[0]))
+             {
+                camino[x1][y1] = 0;
+                x1++;
+                //if (camino[x1][y1] == 4) 
+                //RestaurarVida(1);
+                camino[x1][y1] = ejercito1[0];
+             }
+              
+        //EJERCITO 2
+
+         //Derecha
+
+      if (!(camino[x2][y2 + 1] == torreta[0] || (y2 + 1) > 9 || camino[x2][y2 + 1] == ejercito1[0]))
+      {
+        camino[x2][y2] = 0;
+        y2++;
+        //if (camino[x2][y2] == 4) 
+        //RestaurarVida(2) ;
+        camino[x2][y2] = ejercito2[0];
+      }
+        
+       //Arriba
+
+        else if (!(camino[x2 - 1][y2] == torreta[0] || (x2 - 1) < 0 || camino[x2 - 1][y2] == ejercito1[0]))
+         {
+            camino[x2][y2] = 0;
+            x2--;
+            //if (camino[x2][y2] == 4) 
+            //RestaurarVida(2);
+            camino[x2][y2] = ejercito2[0];
+         }     
+
+         //Abajo
+
+        else if (!(camino[x2 + 1][y2] == torreta[0] || (x2 + 1) > 9 || camino[x2 + 1][y2] == ejercito1[0]))
+          {
+             camino[x2][y2] = 0;
+             x2++;
+             //if (camino[x2][y2] == 4)
+             //RestaurarVida(2);
+             camino[x2][y2] = ejercito2[0];  
+          }       
+
+          //Izquierda
+
+           else if (camino[x2][y2 - 1] == 4||!(camino[x2][y2 - 1] == torreta[0] || (y2 - 1) < 0 || camino[x2][y2 - 1] == ejercito1[0]))
+            {
+              camino[x2][y2] = 0;
+               y2--;
+               //if (camino[x2][y2] == 4) 
+               //RestaurarVida(2) ;
+               camino[x2][y2] = ejercito2[0];
+           }
+              
+               
+              
+}
+
 //Método que identifica si los ejercitos estan cerca del enemigo
 
 int tablero::PosicionAtaque(){
@@ -378,7 +478,9 @@ void tablero::Batalla(int N){
          
        break;
 
-     }       
+     } 
+
+     CambioPosiciones();      
 
 }
 
