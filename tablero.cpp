@@ -110,7 +110,7 @@ void tablero::posiciones_iniciales(){
   camino[x2][y2]=ejercito2[0];//posicion inicial del ejército 2
   //camino[4][4]=torreta[0];//posicion inicial de la torreta
 
-
+/*
   //AVATARES EJERCITO 1
 
    //Luchadores
@@ -122,7 +122,7 @@ void tablero::posiciones_iniciales(){
    //Magos 
     Ejercito_1[4] = new Avatar(5 , 1, 0.2, "Mago");
 
-
+*/
 
   //AVATARES EJERCITO 2
 
@@ -135,6 +135,106 @@ void tablero::posiciones_iniciales(){
    //Magos 
     Ejercito_2[4] = new Avatar(5 , 1, 0.2, "Mago");
 
+}
+
+//Método que cambia las Posiciones de los ejercitos después de cada enfrentamiento
+
+void tablero::CambioPosiciones(){
+
+  //EJERCITO 1
+
+     //Izquierda       
+
+    if (!(camino[x1][y1 - 1] == torreta[0] || (y1 - 1) < 0 || camino[x1][y1 - 1] == ejercito2[0]))
+    {
+       camino[x1][y1] = 0;
+       y1--;
+      // if (camino[x1][y1] == 4) 
+       //RestaurarVida(1);
+       camino[x1][y1] = ejercito1[0];
+    }   
+     
+     //Arriba
+
+     else if (!(camino[x1 - 1][y1] == torreta[0] || (x1 - 1) < 0 || camino[x1 - 1][y1] == ejercito2[0])) {
+         camino[x1][y1] = 0;
+         x1--;
+         //if (camino[x1][y1] == 4) 
+         //RestaurarVida(1);
+         camino[x1][y1] = ejercito1[0];
+
+      }
+      //Derecha
+      
+        else if (!(camino[x1][y1 + 1] == torreta[0] || (y1 + 1) > 9 || camino[x1][y1 + 1] == ejercito2[0]))
+          {
+
+             camino[x1][y1] = 0;
+             y1++;
+             //if (camino[x1][y1] == 4) 
+             //RestaurarVida(1);
+             camino[x1][y1] = ejercito1[0];
+          }
+
+          //Abajo
+
+            else if (!(camino[x1 + 1][y1] == torreta[0] || (x1 + 1) > 9 || camino[x1 + 1][y1] == ejercito2[0]))
+             {
+                camino[x1][y1] = 0;
+                x1++;
+                //if (camino[x1][y1] == 4) 
+                //RestaurarVida(1);
+                camino[x1][y1] = ejercito1[0];
+             }
+              
+        //EJERCITO 2
+
+         //Derecha
+
+      if (!(camino[x2][y2 + 1] == torreta[0] || (y2 + 1) > 9 || camino[x2][y2 + 1] == ejercito1[0]))
+      {
+        camino[x2][y2] = 0;
+        y2++;
+        //if (camino[x2][y2] == 4) 
+        //RestaurarVida(2) ;
+        camino[x2][y2] = ejercito2[0];
+      }
+        
+       //Arriba
+
+        else if (!(camino[x2 - 1][y2] == torreta[0] || (x2 - 1) < 0 || camino[x2 - 1][y2] == ejercito1[0]))
+         {
+            camino[x2][y2] = 0;
+            x2--;
+            //if (camino[x2][y2] == 4) 
+            //RestaurarVida(2);
+            camino[x2][y2] = ejercito2[0];
+         }     
+
+         //Abajo
+
+        else if (!(camino[x2 + 1][y2] == torreta[0] || (x2 + 1) > 9 || camino[x2 + 1][y2] == ejercito1[0]))
+          {
+             camino[x2][y2] = 0;
+             x2++;
+             //if (camino[x2][y2] == 4)
+             //RestaurarVida(2);
+             camino[x2][y2] = ejercito2[0];  
+          }       
+
+          //Izquierda
+
+           else if (camino[x2][y2 - 1] == 4||!(camino[x2][y2 - 1] == torreta[0] || (y2 - 1) < 0 || camino[x2][y2 - 1] == ejercito1[0]))
+            {
+              camino[x2][y2] = 0;
+               y2--;
+               //if (camino[x2][y2] == 4) 
+               //RestaurarVida(2) ;
+               camino[x2][y2] = ejercito2[0];
+           }
+              
+               
+              
 }
 
 //Método que identifica si los ejercitos estan cerca del enemigo
@@ -389,8 +489,49 @@ void tablero::Batalla(int N){
          
        break;
 
-     }       
+     } 
 
+     CambioPosiciones();      
+
+}
+
+//Método para configurar los Avatares del ejerctito
+
+void tablero::Avatares(){
+    
+    cout<< "Tiene " << (cant_ejercito / 2) << " posibles Avatar para escoger.\n";
+    string Opcion;
+
+    
+    for (int i = 0;i < (cant_ejercito / 2); i++ ){
+
+      
+      cout << "Para elegir sus Avatar seleccione una de las siguintes opciones y luego presione enter:\n 1. Mago\n 2. Tirador\n 3. Luchador\n\n";
+
+      cout << "Avatar [" << i + 1 << "]\n";
+      
+      int x = 0;
+      cin >> x;
+      cout << endl;
+
+      switch(x){
+       //Mago
+        case 1:
+        Ejercito_1[i] = new Avatar(5 , 1, 0.2, "Mago");
+        break;
+        //Tirador
+        case 2:
+        Ejercito_1[i] = new Avatar(3 , 0.3, 1,"Tirador");
+        break;
+        //Luchador
+        case 3:
+        Ejercito_1[i] = new Avatar(4, 0.6, 0.7, "Luchador");
+        
+        break;
+      }
+      system("clear");
+    }
+    
 }
 
 
@@ -562,7 +703,7 @@ void tablero::MostrarDatos(){
        //Mostrar informacion de los ejercitos
         cout << "    Ejercito 1    ";
         cout << "  Ejercito 2\n ";  
-      for(int i = 0; i < 5; i++){
+      for(int i = 0; i < Ejercito_1.size()+1; i++){
           //Nombre ejercito 1
            cout <<i<< ". "<< Ejercito_1[i] -> Nombre <<": ";
           //Vida ejercito 1
@@ -743,6 +884,7 @@ void tablero::menu() {
         break;
       case 2:
         system("clear");
+        Avatares();
         mostrar_archivo();
         mover_ejercito();
         break;
