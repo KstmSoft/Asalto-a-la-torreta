@@ -64,11 +64,22 @@ void tablero::cambiar_ejercito(){
 }
 
 void tablero::mostrar_archivo() {
-  for (int i = 0; i < 10; i++) {
-    for (int j = 0; j < 10; j++) {
-      cout << camino[i][j] << "   ";
+  cout << "    ";
+  for(int j = 0;j < 10;j++){      
+      cout << j << "   ";
+          
+    }
+
+    cout << endl << endl;
+    
+
+  for(int i = 0;i < 10;i++){
+    cout << i << "   ";    
+    for(int j = 0;j < 10;j++){      
+      cout << camino[i][j] << "   ";      
     }
     cout << endl;
+
   }
 }
 
@@ -216,7 +227,7 @@ void tablero::Batalla(int N){
 
             Vivos = 0;
 
-            for (int j = 0; j < 5; j++){
+            for (int j = 0; j < Ejercito_1.size(); j++){
                if(Ejercito_1[j] -> Vida != 0){
                    Vivos+=1;
                    s = j;
@@ -246,7 +257,7 @@ void tablero::Batalla(int N){
             
             Vivos2 = 0;
 
-            for (int j = 0; j < 5; j++){
+            for (int j = 0; j < Ejercito_2.size(); j++){
                if(Ejercito_2[j] -> Vida != 0){
                     Vivos2+=1;
                     s2 = j;
@@ -310,7 +321,7 @@ void tablero::Batalla(int N){
 
              Vivos = 0;
 
-            for (int j = 0; j < 5; j++){
+            for (int j = 0; j < Ejercito_2.size(); j++){
                if(Ejercito_2[j] -> Vida != 0){
                    Vivos+=1;
                    s = j;
@@ -340,7 +351,7 @@ void tablero::Batalla(int N){
 
             Vivos2 = 0;
 
-            for (int j = 0; j < 5; j++){
+            for (int j = 0; j < Ejercito_1.size(); j++){
                if(Ejercito_1[j] -> Vida != 0){
                    Vivos2+=1;
                    s2 = j;
