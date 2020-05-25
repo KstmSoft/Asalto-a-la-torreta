@@ -30,7 +30,7 @@ class tablero{
     void repartir_bonos();
     void cambiar_ejercito();
     void atacar();
-    void guardar_partida(string);
+    void guardar_partida();
     void cargar_datos(string); 
     void MostrarDatos();
     int PosicionAtaque();

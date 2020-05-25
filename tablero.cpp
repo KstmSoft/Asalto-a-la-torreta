@@ -492,6 +492,7 @@ void tablero::Batalla(int N){
      } 
 
      CambioPosiciones();      
+<<<<<<< HEAD
 
 }
 
@@ -504,6 +505,8 @@ void tablero::Avatares(){
 
     
     for (int i = 0;i < (cant_ejercito / 2); i++ ){
+=======
+>>>>>>> origin/Desarrollo
 
       
       cout << "Para elegir sus Avatar seleccione una de las siguintes opciones y luego presione enter:\n 1. Mago\n 2. Tirador\n 3. Luchador\n\n";
@@ -732,11 +735,9 @@ void tablero::mod_bonus(int nuevoValor) {
   bonus = nuevoValor;
 }
 //guarda la partida en un archivo plano
-void tablero::guardar_partida(string nombre) {
+void tablero::guardar_partida() {
   ofstream archive;
-  string name;
-  name=nombre+".txt";
-  archive.open(name);
+  archive.open("PartidaAnterior.txt");
   if(archive.fail()){
     cout << "No se pudo abrir el archivo.";
     exit(1);
@@ -896,11 +897,15 @@ void tablero::menu() {
     }
   } while (opcion != 0);
   system("clear");
-  cout << "nombre de la partida: \n";
-  string nombree;
-  cin >> nombree;
-  guardar_partida(nombree);
+  string guardar; 
+  cout << "¿Desea guardar la partida? Escriba SI o NO (Tenga en cuenta que si tiene una partida guardada, la sobreescribirá)" << endl;
+  cin >> guardar;
+  if (guardar=="SI" || guardar=="Si" || guardar=="sI" ||guardar=="si"){
+  guardar_partida();
   cout << "Guardando partida...\n";
+  }
+  else
+  cout << "¡Hasta luego!\n"; 
 }
 
 void tablero::cambiar_valores() {
