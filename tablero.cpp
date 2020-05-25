@@ -493,6 +493,9 @@ void tablero::Batalla(int N){
 
      CambioPosiciones();      
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/Desarrollo
 
 }
 
